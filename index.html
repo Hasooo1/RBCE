@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Role Test Report Viewer</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>🔐 Role-Based Access Control Test Report</h1>
+        <p class="subtitle">Penetration Testing - Authorization Matrix Analysis</p>
+        
+        <div id="dropZone" class="drop-zone">
+            <div class="icon">📁</div>
+            <p>Drop CSV file here or click to browse</p>
+            <input type="file" id="fileInput" accept=".csv">
+        </div>
+
+        <div id="reportContent" class="hidden">
+            <div class="legend">
+                <div class="legend-item"><div class="legend-color" style="background:#f85149;"></div> ACCESSIBLE (Potential Issue)</div>
+                <div class="legend-item"><div class="legend-color" style="background:#3fb950;"></div> REDIRECT (Protected)</div>
+                <div class="legend-item"><div class="legend-color" style="background:#d29922;"></div> DENIED (Forbidden)</div>
+                <div class="legend-item"><div class="legend-color" style="background:#8b949e;"></div> ERROR</div>
+                <div class="legend-item"><div class="legend-color" style="background:#6e7681;"></div> UNKNOWN</div>
+            </div>
+
+            <div class="stats-container" id="statsContainer"></div>
+
+            <div class="filters">
+                <h3>🔍 Filters</h3>
+                <div class="filter-row">
+                    <div class="filter-group">
+                        <label>Search URL</label>
+                        <input type="text" id="searchUrl" placeholder="Filter by URL...">
+                    </div>
+                    <div class="filter-group">
+                        <label>Method</label>
+                        <select id="filterMethod"></select>
+                    </div>
+                    <div id="roleFiltersContainer"></div>
+                </div>
+                <div class="filter-row" style="margin-top: 15px;">
+                    <div class="filter-group">
+                        <label>Quick Filters</label>
+                        <div class="checkbox-group">
+                            <label><input type="checkbox" id="showInteresting"> Interesting Only (Unauth ACCESSIBLE)</label>
+                            <label><input type="checkbox" id="hideOptions"> Hide OPTIONS</label>
+                        </div>
+                    </div>
+                    <button class="btn" id="resetBtn">Reset Filters</button>
+                    <button class="btn btn-primary" id="exportBtn">Export Filtered CSV</button>
+                    <button class="btn" id="loadNewBtn">Load New File</button>
+                </div>
+            </div>
+
+            <div class="table-container">
+                <div class="results-info" id="resultsInfo">Loading...</div>
+                <div class="table-scroll">
+                    <table>
+                        <thead id="tableHead"></thead>
+                        <tbody id="tableBody"></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/main.js"></script>
+</body>
+</html>
